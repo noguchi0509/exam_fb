@@ -1,0 +1,9 @@
+<h1>投稿画面</h1>
+<%= notice %>
+<%= form_with(model: @post, url:confirm_posts_path, local: true) do |form| %>
+  <%= form.label :text %>
+  <%= form.text_field :text %>
+  <%= form.submit %>
+<% end %>
+
+<%= link_to 'トップに戻る', posts_path %>
