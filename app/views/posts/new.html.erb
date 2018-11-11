@@ -3,6 +3,10 @@
 <%= form_with(model: @post, url:confirm_posts_path, local: true) do |form| %>
   <%= form.label :text %>
   <%= form.text_field :text %>
+  
+  <%= form.label :image %>
+  <%= form.file_field :image %>
+  
   <%= form.submit %>
 <% end %>
 
