@@ -7,6 +7,9 @@
 <% @posts.each do |post| %>
   <tr>
     <td> <%= post.text %></td>
+    <% if post.image.url.present? %>
+    <td> <%= image_tag (post.image.url) %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

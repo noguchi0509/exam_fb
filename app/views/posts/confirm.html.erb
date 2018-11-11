@@ -12,6 +12,9 @@
     <% end %>
      <%= form.hidden_field :text %>
      
+     <%= image_tag (@post.image.url) %>
+     <%= form.hidden_field :image_cache %>
+     
     <p><%= @post.text %></p>
     <%= form.submit "投稿する" %>
 <% end %>

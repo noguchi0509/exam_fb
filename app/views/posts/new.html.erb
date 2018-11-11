@@ -1,6 +1,6 @@
 <h1>投稿画面</h1>
 <%= notice %>
-<%= form_with(model: @post, url:confirm_posts_path, local: true) do |form| %>
+<%= form_with(model: @post, url:confirm_posts_path, local: true, method: :post ) do |form| %>
   <%= form.label :text %>
   <%= form.text_field :text %>
   

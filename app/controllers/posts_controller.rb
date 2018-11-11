@@ -17,10 +17,13 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-        redirect_to new_post_path, notice:"投稿しました！"
+        redirect_to posts_path, notice:"投稿しました！"
     else
         render 'confirm'
     end
+  end
+  
+  def destroy
   end
   
   private
