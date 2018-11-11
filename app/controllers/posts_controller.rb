@@ -14,6 +14,13 @@ class PostsController < ApplicationController
     end
   end
   
+  def edit_confirm
+    @post = Post.new(post_params)
+    if @post.valid?
+        render 'edit_confirm'
+    end
+  end
+  
   def create
     @post = Post.new(post_params)
     if @post.save
@@ -23,10 +30,21 @@ class PostsController < ApplicationController
     end
   end
   
+  def edit
+    if params[:back]
+      @post = Post.new(post_params)
+    else
+      @post = Post.find(params[:id])
+    end
+  end
+  
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path, notice:"削除しました"
+  end
+  
+  def update
   end
   
   private
@@ -34,5 +52,4 @@ class PostsController < ApplicationController
   def post_params
       params.require(:post).permit(:text, :image, :image_cache)
   end
-   
 end

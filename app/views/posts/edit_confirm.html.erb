@@ -1,0 +1,20 @@
+<h1>以下の内容で投稿する</h1>
+<%= form_with(model: @post, url:post_path, local: true, method: :patch ) do |form| %>
+    <% if @post.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= @post.errors.count %>件のエラーがあります</h2>
+            <ul>
+            <% @post.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+            </ul>
+        </div>
+    <% end %>
+     <%= form.hidden_field :text %>
+     
+     <%= image_tag (@post.image.url) %>
+     <%= form.hidden_field :image_cache %>
+     
+    <p><%= @post.text %></p>
+    <%= form.submit "投稿する" %>
+<% end %>
