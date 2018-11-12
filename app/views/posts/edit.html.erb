@@ -5,6 +5,7 @@
   <%= form.text_field :text %>
   
   <%= form.label :image %>
+  <%= image_tag(@post.image.url) if @post.image.url %>
   <%= form.file_field :image %>
   
   <%= form.submit %>

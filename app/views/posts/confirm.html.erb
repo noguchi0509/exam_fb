@@ -12,9 +12,17 @@
     <% end %>
      <%= form.hidden_field :text %>
      
-     <%= image_tag (@post.image.url) %>
+     <% if @post.image.url.present? %>
+      <%= image_tag (@post.image.url) %>
+    <% end %>
      <%= form.hidden_field :image_cache %>
      
     <p><%= @post.text %></p>
     <%= form.submit "投稿する" %>
+<% end %>
+
+<%= form_with(model: @post, url: new_post_path, local: true,method: :get) do |form| %>
+    <%= form.hidden_field :text %>
+    <%= form.hidden_field :image_cache %>
+    <%= form.submit "もどる", name: 'back' %>
 <% end %>

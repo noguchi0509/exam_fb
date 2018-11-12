@@ -4,7 +4,11 @@ class PostsController < ApplicationController
   end
     
   def new
-    @post = Post.new
+    if params[:back]
+      @post = Post.new(post_params)
+    else
+      @post = Post.new
+    end
   end
   
   def confirm
@@ -45,6 +49,12 @@ class PostsController < ApplicationController
   end
   
   def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to posts_path, notice:"編集しました！"
+    else
+      render 'edit'
+    end
   end
   
   private
