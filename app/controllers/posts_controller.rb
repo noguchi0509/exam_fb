@@ -12,9 +12,10 @@ class PostsController < ApplicationController
   end
   
   def confirm
-    @post = Post.new(post_params)
-    if @post.valid?
-        render 'confirm'
+    # @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
+    if @post.invalid?
+        render 'new'
     end
   end
   
@@ -27,6 +28,8 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    # @post = current_user.posts.build(post_params)
     if @post.save
         redirect_to posts_path, notice:"投稿しました！"
     else
@@ -49,7 +52,9 @@ class PostsController < ApplicationController
   end
   
   def update
-    @post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
+    # @post.user_id = current_user.id
+    @post = current_user.posts.build(params[:id])
     if @post.update(post_params)
       redirect_to posts_path, notice:"編集しました！"
     else
