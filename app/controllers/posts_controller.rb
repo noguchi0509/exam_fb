@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :set_post,only: [:destroy, :update]
+  
   def index
     @posts = Post.all
   end
@@ -20,7 +22,7 @@ class PostsController < ApplicationController
   end
   
   def edit_confirm
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.valid?
         render 'edit_confirm'
     end
@@ -46,15 +48,15 @@ class PostsController < ApplicationController
   end
   
   def destroy
-    @post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path, notice:"削除しました"
   end
   
   def update
     # @post = Post.find(params[:id])
-    # @post.user_id = current_user.id
-    @post = current_user.posts.build(params[:id])
+    @post.user_id = current_user.id
+    # @post = current_user.posts.build(params[:id])
     if @post.update(post_params)
       redirect_to posts_path, notice:"編集しました！"
     else
@@ -67,4 +69,9 @@ class PostsController < ApplicationController
   def post_params
       params.require(:post).permit(:text, :image, :image_cache)
   end
+  
+  def set_post
+    @post = Post.find(params[:id])
+  end
+  
 end
