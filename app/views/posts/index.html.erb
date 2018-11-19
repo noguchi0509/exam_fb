@@ -1,21 +1,38 @@
-<h1>Home</h1>
+<h1>投稿一覧</h1>
 <%= notice %>
-<table>
-  <tr>
-    <th>Post</th>
-  </tr>
-<% @posts.each do |post| %>
-  <tr>
-    <td> <%= post.text %></td>
-    <% if post.image.url.present? %>
-    <td> <%= image_tag (post.image.url) %></td>
-    <% end %>
-    <td> <%= post.user.name %></td>
-    <td><%= link_to '編集する', edit_post_path(post.id), method: :get %></td>
-    <td><%= link_to '削除する', post_path(post.id), method: :delete, data: {confirm: '本当に削除していいですか？'} %></td>
+<!--<table>-->
+<!--<% @posts.each do |post| %>-->
+<!--  <tr>-->
+<!--    <td> <%= post.text %></td>-->
+<!--    <% if post.image.url.present? %>-->
+<!--    <td> <%= image_tag (post.image.url) %></td>-->
+<!--    <% end %>-->
+<!--    <td> <%= post.user.name %></td>-->
+<!--    <td><%= link_to '編集する', edit_post_path(post.id), method: :get %></td>-->
+<!--    <td><%= link_to '削除する', post_path(post.id), method: :delete, data: {confirm: '本当に削除していいですか？'} %></td>-->
+<!--  </tr>-->
+<!--<% end %>-->
+<!--</table>-->
 
-  </tr>
-<% end %>
-</table>
-<%= link_to '投稿する', new_post_path %>
-<%= link_to 'アカウントを作る', new_user_path %>
+<div class="row">
+  <% @posts.each do |post| %>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+         <% if post.image.url.present? %>
+         <%= image_tag (post.image.url) %>
+        <% end %>
+      <div class="caption">
+        <h3>投稿者：<%= post.user.name %></h3>
+        <p>テキスト：<%= post.text %></p>
+        <% if current_user.present? %>
+        <p><%= link_to '編集する', edit_post_path(post.id), method: :get, class:"btn btn-primary" %>
+        <% end %>
+        <%= link_to '削除する', post_path(post.id), method: :delete, data: {confirm: '本当に削除していいですか？'}, class:"btn btn-default" %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+
+<!--<%= link_to 'アカウントを作る', new_user_path %>-->
