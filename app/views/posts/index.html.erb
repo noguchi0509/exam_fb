@@ -14,6 +14,16 @@
 <!--<% end %>-->
 <!--</table>-->
 
+<div class="jumbotron">
+  <h1>画像とテキストを投稿しよう！</h1>
+  <p>FBは画像とテキストを投稿できるサイトです。</p>
+  <% if logged_in? %>
+  <p><%= link_to 'いますぐ投稿！', new_post_path, class:"btn btn-primary btn-lg" %></p>
+  <% else %>
+  <p><%= link_to 'アカウントを作る', new_user_path, class:"btn btn-primary btn-lg" %></p>
+  <% end %>
+</div>
+
 <div class="row">
   <% @posts.each do |post| %>
   <div class="col-sm-6 col-md-4">
