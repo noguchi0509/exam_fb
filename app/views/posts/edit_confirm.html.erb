@@ -15,7 +15,7 @@
  
   <%= form.hidden_field :image_cache %>
     <% if @post.image.url.present? %>
-      <%= image_tag (@post.image.url) %>
+      <%= image_tag(@post.image.url, size: "300x300") %>
     <% end %>
   
   <%= form.submit "投稿する" %>
